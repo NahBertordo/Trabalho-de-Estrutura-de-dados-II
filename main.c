@@ -2,7 +2,19 @@
 #include <stdlib.h>
 #include "arvoreb.h"
 
+// Comandos usados para que rode o programa:
+// gcc -o main.exe main.c arvoreb.c
+// ./main.exe dados.bin arvore.txt
+
 FILE *arquivoRegistros; // Ponteiro global para gerenciar o arquivo binário onde os dados (Cadastro) ficam salvos
+
+// Estrutura de um registro, os dados que serão salvos no arquivo binário
+typedef struct
+{
+    int matricula;     // Chave primária(Id único do usuario)
+    char nome[50];     // Nome do aluno
+    char telefone[20]; // Telefone de contato
+} Cadastro;
 
 // Reconstrói a Árvore B lendo o arquivo binário do início ao fim
 void carregarArvore()

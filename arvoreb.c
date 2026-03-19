@@ -2,6 +2,16 @@
 #include <stdlib.h>
 #include "arvoreb.h"
 
+// Estrutura de uma página(nó) da arvore B
+typedef struct NoArvoreB
+{
+    int n;                           // Guarda a quantidade atual de chaves inseridas neste nó
+    int chaves[2 * T - 1];           // Guarda as matriculas no vetor (indices de busca)
+    long pos[2 * T - 1];             // Guarda o deslocamento no vetor (byte offset) do registro no arquivo binario
+    struct NoArvoreB *filhos[2 * T]; // Vetor de ponteiros para os nos filhos (sempre n + 1 filhos)
+    int folha;                       // Booleano: 1 se o nó for uma folha (nao tem filhos), 0 caso contrario
+} NoArvoreB;
+
 NoArvoreB *RAIZ = NULL; // Define a variavel global que aponta para o topo da árvore
 
 // Aloca momória para um nó e limpa os ponteiros de filhos
@@ -13,6 +23,13 @@ NoArvoreB *criarNo(int folha)
     // Garante que todos os ponteiros de filhos comecem apontando para o vazio (NULL)
     for (int i = 0; i < 2 * T; i++)
         no->filhos[i] = NULL;
+
+    // Inicializa as chaves com -1 (ou 0) para indicar que estão vazia
+    for (int i = 0; i < (2 * T - 1); i++)
+    {
+        no->chaves[i] = -1; // Altere para 0 se preferir
+    }
+
     return no;
 }
 

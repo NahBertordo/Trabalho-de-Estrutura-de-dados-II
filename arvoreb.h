@@ -3,23 +3,7 @@
 
 #define T 3 // Ordem minima da arvore B, Cada no (menos a raiz) devete ter entre T-1 e 2T-1 chaves
 
-// Estrutura de um registro, os dados que serão salvos no arquivo binario
-typedef struct
-{
-    int matricula;     // Chave primaria(Id unico do usuario)
-    char nome[50];     // Nome do aluno
-    char telefone[20]; // Telefone de contato
-} Cadastro;
-
-// Estrutura de uma página(nó) da arvore B
-typedef struct NoArvoreB
-{
-    int n;                           // Guarda a quantidade atual de chaves inseridas neste nó
-    int chaves[2 * T - 1];           // Guarda as matriculas no vetor (indices de busca)
-    long pos[2 * T - 1];             // Guarda o deslocamento no vetor (byte offset) do registro no arquivo binario
-    struct NoArvoreB *filhos[2 * T]; // Vetor de ponteiros para os nos filhos (sempre n + 1 filhos)
-    int folha;                       // Booleano: 1 se o nó for uma folha (nao tem filhos), 0 caso contrario
-} NoArvoreB;
+typedef struct NoArvoreB NoArvoreB;
 
 // ------Prototipos das funções------
 // Funcoes do TAD
